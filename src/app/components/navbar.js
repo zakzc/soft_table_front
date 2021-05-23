@@ -4,8 +4,8 @@ import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 const navigation = [
-  { name: "Visualizar", href: "#", current: true },
-  { name: "Novo Cadastro", href: "#", current: false },
+  { name: "Visualizar", href: "/", current: true },
+  { name: "Novo Cadastro", href: "/cadastro", current: false },
 ];
 
 function classNames(...classes) {

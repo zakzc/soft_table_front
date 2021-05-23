@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Jane Cooper",
+    "idade": "32",
+    "estadoCivil": "Solteira",
+    "cpf": "6283741345-01",
+    "cidade": "Caragatatuba",
+    "estado": "Bahia"
+  },
+  {
+    "name": "John Smith Cooper",
+    "idade": "40",
+    "estadoCivil": "Solteiro",
+    "cpf": "92834363121345-02",
+    "cidade": "Rio de Janeiro",
+    "estado": "Rio de Janeiro"
+  },
+  {
+    "name": "José da Silva",
+    "idade": "48",
+    "estadoCivil": "Casado",
+    "cpf": "82834351345-01",
+    "cidade": "São Paulo",
+    "estado": "São Paulo"
+  },
+  {
+    "name": "Maria Oliveira",
+    "idade": "28",
+    "estadoCivil": "Solteira",
+    "cpf": "72834351345-01",
+    "cidade": "Belo Horizonte",
+    "estado": "Minas Gerais"
+  }
+]
