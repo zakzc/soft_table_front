@@ -1,6 +1,21 @@
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
-export default function Cadastro() {
+export default function Cadastro({ addNewPerson }) {
+  const [nome, setNome] = useState();
+  const [idade, setIdade] = useState();
+  const [estadoCivil, setEstadoCivil] = useState();
+  const [cpf, setCpf] = useState();
+  const [cidade, setCidade] = useState();
+  const [estado, setEstado] = useState();
+  const [redirect, setRedirect] = useState(false);
+  ///
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const novoCadastro = { nome, idade, estadoCivil, cpf, cidade, estado };
+    addNewPerson(novoCadastro);
+    setRedirect(true);
+  };
   ///
   return (
     <>
@@ -34,7 +49,7 @@ export default function Cadastro() {
                     <div className="grid grid-cols-6 gap-6">
                       <div className="col-span-6 sm:col-span-3">
                         <label
-                          htmlFor="first_name"
+                          htmlFor="nome"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Nome
@@ -44,38 +59,39 @@ export default function Cadastro() {
                           name="name"
                           id="name"
                           autoComplete="given-name"
-                          //   onChange={(e) => setNome(e.target.value)}
+                          onChange={(e) => setNome(e.target.value)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
                         <label
-                          htmlFor="age"
+                          htmlFor="idade"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Idade
                         </label>
                         <input
                           type="text"
-                          name="age"
-                          id="age"
-                          //   onChange={(e) => setIdade(e.target.value)}
+                          name="idade"
+                          id="idade"
+                          onChange={(e) => setIdade(e.target.value)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
 
                       <div className="col-span-4 sm:col-span-4">
                         <label
-                          htmlFor="civilState"
+                          htmlFor="estado_civil"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Estado civil
                         </label>
                         <input
                           type="text"
-                          name="civilState"
-                          id="civilState"
+                          name="estado_civil"
+                          id="estado_civil"
+                          onChange={(e) => setEstadoCivil(e.target.value)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
@@ -91,7 +107,7 @@ export default function Cadastro() {
                           type="text"
                           name="cpf"
                           id="cpf"
-                          autoComplete="postal-code"
+                          onChange={(e) => setCpf(e.target.value)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
@@ -107,6 +123,7 @@ export default function Cadastro() {
                           type="text"
                           name="city"
                           id="city"
+                          onChange={(e) => setCidade(e.target.value)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
@@ -121,36 +138,44 @@ export default function Cadastro() {
                         <select
                           id="state"
                           name="state"
-                          autoComplete="country"
+                          onChange={(e) => setEstado(e.target.value)}
                           className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         >
-                          <option>Acre</option>
-                          <option>Alagoas</option>
-                          <option>Amapá</option>
-                          <option>Amazonas</option>
-                          <option>Bahia</option>
-                          <option>Ceará</option>
-                          <option>Distrito Federal</option>
-                          <option>Espírito Santo</option>
-                          <option>Goiás</option>
-                          <option>Maranhão</option>
-                          <option>Mato Grosso</option>
-                          <option>Mato Grosso do Sul</option>
-                          <option>Minas Gerais</option>
-                          <option>Pará</option>
-                          <option>Paraíba </option>
-                          <option>Paraná </option>
-                          <option>Pernambuco</option>
-                          <option>Piauí</option>
-                          <option>Rio de Janeiro </option>
-                          <option>Rio Grande do Norte </option>
-                          <option>Rio Grande do Sul </option>
-                          <option>Rondônia </option>
-                          <option>Roraima </option>
-                          <option> Santa Catarina</option>
-                          <option>São Paulo </option>
-                          <option>Sergipe</option>
-                          <option> Tocantins </option>
+                          <option value="Acre">Acre</option>
+                          <option value="Alagoas">Alagoas</option>
+                          <option value="Amapá">Amapá</option>
+                          <option value="Amazonas">Amazonas</option>
+                          <option value="Bahia">Bahia</option>
+                          <option value="Ceará">Ceará</option>
+                          <option value="Distrito Federal">
+                            Distrito Federal
+                          </option>
+                          <option value="Espírito Santo">Espírito Santo</option>
+                          <option value="Goiás">Goiás</option>
+                          <option value="Maranhão">Maranhão</option>
+                          <option value="Mato Grosso">Mato Grosso</option>
+                          <option value="Mato Grosso do Sul">
+                            Mato Grosso do Sul
+                          </option>
+                          <option value="Minas Gerais">Minas Gerais</option>
+                          <option value="Pará">Pará</option>
+                          <option value="Paraíba">Paraíba </option>
+                          <option value="Paraná">Paraná </option>
+                          <option value="Pernambuco">Pernambuco</option>
+                          <option value="Piauí">Piauí</option>
+                          <option value="Rio de Janeiro">Rio de Janeiro</option>
+                          <option value="Rio Grande do Norte">
+                            Rio Grande do Norte
+                          </option>
+                          <option value="Rio Grande do Sul">
+                            Rio Grande do Sul
+                          </option>
+                          <option value="Rondônia">Rondônia </option>
+                          <option value="Roraima">Roraima </option>
+                          <option value="Santa Catarina">Santa Catarina</option>
+                          <option value="São Paulo">São Paulo </option>
+                          <option value="Sergipe">Sergipe</option>
+                          <option value="Tocantins"> Tocantins </option>
                         </select>
                       </div>
                     </div>
@@ -158,7 +183,7 @@ export default function Cadastro() {
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button
                       type="submit"
-                      //   onClick={handleSubmit}
+                      onClick={handleSubmit}
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Cadastrar
@@ -176,6 +201,7 @@ export default function Cadastro() {
           </div>
         </div>
       </div>
+      {redirect ? <Redirect push to="/" /> : null}
     </>
   );
 }

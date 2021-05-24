@@ -9,6 +9,12 @@ import base from "./app/baseData/baseCadastro.json";
 
 const App = () => {
   const [people, setPeople] = useState(base);
+  const addNewPerson = (newPerson) => {
+    console.log("Received");
+    setPeople([...people, newPerson]);
+    console.log("=>", people, typeof people, newPerson, typeof newPerson);
+    console.log("is now: ", people);
+  };
   return (
     <div className="App">
       <Router>
@@ -18,7 +24,7 @@ const App = () => {
           <Route
             exact
             path="/cadastro"
-            render={(props) => <Cadastro {...setPeople} />}
+            render={(props) => <Cadastro {...{ addNewPerson }} />}
           />
         </Switch>
       </Router>
