@@ -5,59 +5,56 @@ import { useFormik } from "formik";
 ///
 import validate from "../utils/validate";
 
-export default function Editar({ addNewPerson }) {
-  const [novoCadastro, setNovoCadastro] = useState("");
+export default function Editar({ personToManage }) {
+  console.log("edit: ", personToManage);
+  //   const [novoCadastro, setNovoCadastro] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [displayMessage, setDisplayMessage] = useState(null);
   ///
-  const displayValidationMessage = (message) => {
-    console.log("=> ", message);
-    setDisplayMessage(message);
-  };
+  console.log("Recebeu: ", personToManage);
+  //   const displayValidationMessage = (message) => {
+  //     console.log("=> ", message);
+  //     setDisplayMessage(message);
+  //   };
   ///
   const handleValidation = (data) => {
     let check = validate(data);
     if (check.success) {
       console.log(check.success);
-      return true;
+      //   return true;
     }
-    displayValidationMessage(check.message);
+    // displayValidationMessage(check.message);
   };
   ///
   const handleSubmit = () => {
     // event.preventDefault();
     // const novoCadastro = { nome, idade, estadoCivil, cpf, cidade, estado };
     console.log("handle:", formik.values);
-    setNovoCadastro({
-      nome: formik.values.nome,
-      idade: formik.values.idade,
-      estadoCivil: formik.values.estadoCivil,
-      cpf: formik.values.cpf,
-      cidade: formik.values.cidade,
-      estado: formik.values.estado,
-    });
-    console.log("now: ", novoCadastro);
-    if (handleValidation(novoCadastro)) {
-      addNewPerson(novoCadastro);
-      setRedirect(true);
-    }
+    // setNovoCadastro({
+    //   nome: formik.values.nome,
+    //   idade: formik.values.idade,
+    //   estadoCivil: formik.values.estadoCivil,
+    //   cpf: formik.values.cpf,
+    //   cidade: formik.values.cidade,
+    //   estado: formik.values.estado,
+    // });
+    // console.log("now: ", novoCadastro);
+    // if (handleValidation(novoCadastro)) {
+    //   editPerson(novoCadastro);
+    //   setRedirect(true);
+    // }
   };
   const formik = useFormik({
-    initialValues: {
-      nome: "",
-      idade: "",
-      estadoCivil: "",
-      cpf: "",
-      cidade: "",
-      estado: "",
-    },
+    enableReinitialize: true,
+    initialValues: personToManage[0],
     onSubmit: handleSubmit,
   });
+  console.log("form: ", formik.initialValues);
   /// views
   const Header = () => {
     return (
       <h2 className="text-2xl p-2 mt-2  font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-        Novo Cadastro
+        Editar Cadastro
       </h2>
     );
   };
@@ -127,7 +124,8 @@ export default function Editar({ addNewPerson }) {
                           name="nome"
                           type="text"
                           id="nome"
-                          value={formik.values.nome}
+                          value={formik.initialValues.nome}
+                          placeholder={formik.initialValues.nome}
                           onChange={formik.handleChange}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
@@ -145,6 +143,7 @@ export default function Editar({ addNewPerson }) {
                           name="idade"
                           id="idade"
                           value={formik.values.idade}
+                          placeholder={formik.initialValues.idade}
                           onChange={formik.handleChange}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
@@ -162,6 +161,7 @@ export default function Editar({ addNewPerson }) {
                           name="estadoCivil"
                           id="estadoCivil"
                           value={formik.values.estadoCivil}
+                          placeholder={formik.initialValues.estadoCivil}
                           onChange={formik.handleChange}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
@@ -179,6 +179,7 @@ export default function Editar({ addNewPerson }) {
                           name="cpf"
                           id="cpf"
                           value={formik.values.cpf}
+                          placeholder={formik.initialValues.cpf}
                           onChange={formik.handleChange}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
@@ -196,6 +197,7 @@ export default function Editar({ addNewPerson }) {
                           name="cidade"
                           id="cidade"
                           values={formik.values.cidade}
+                          placeholder={formik.initialValues.cidade}
                           onChange={formik.handleChange}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
@@ -212,6 +214,7 @@ export default function Editar({ addNewPerson }) {
                           id="estado"
                           name="estado"
                           values={formik.values.estado}
+                          placeholder={formik.initialValues.estado}
                           onChange={formik.handleChange}
                           className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         >

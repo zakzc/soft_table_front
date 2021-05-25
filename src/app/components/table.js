@@ -1,18 +1,29 @@
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
-export default function Table(props) {
-  const [list] = useState(props[0]);
-  const [pageIndex] = useState(8);
+export default function Table({ Listagem, setPersonToManage }) {
+  // const [list] = useState(props[0]);
+  // const [pageIndex] = useState(8);
   // const [curPage, setCurPage] = useState(1);
   // const [numberOfPages] = useState(Math.ceil(list.length / pageIndex));
   // const [pageBegin, setPageBegin] = useState((curPage - 1) * pageIndex);
   // const [pageEnd, setPageEnd] = useState(pageBegin + pageIndex);
   // const [people, setPeople] = useState(list.slice(pageBegin, pageEnd));
-  const [curPage] = useState(1);
-  const [pageBegin] = useState((curPage - 1) * pageIndex);
-  const [pageEnd] = useState(pageBegin + pageIndex);
-  const [people] = useState(props[0]);
+  // const [curPage] = useState(1);
+  // const [pageBegin] = useState((curPage - 1) * pageIndex);
+  // const [pageEnd] = useState(pageBegin + pageIndex);
+  const [people] = useState(Listagem);
+  const [selected, setSelected] = useState("");
+  const [goToEdit, setGoToEdit] = useState(false);
 
+  console.log("pe", people, typeof people);
+  const SelectItemToManage = (e) => {
+    let value = e.target.value;
+    let itemToSet = people.filter((i) => i.cpf == value);
+    console.log("now: ", itemToSet);
+    setPersonToManage(itemToSet);
+    setGoToEdit(true);
+  };
   // views
   const Header = () => {
     return (
@@ -111,7 +122,7 @@ export default function Table(props) {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {people.map((person) => (
-                      <tr key={person.cpf}>
+                      <tr key={person.cpf} value={person}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">
                             {person.nome}
@@ -121,9 +132,9 @@ export default function Table(props) {
                           <div className="text-sm text-gray-900">
                             {person.idade}
                           </div>
-                          <div className="text-sm text-gray-500">
+                          {/* <div className="text-sm text-gray-500">
                             {person.department}
-                          </div>
+                          </div> */}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           {person.estadoCivil}
@@ -138,7 +149,14 @@ export default function Table(props) {
                           {person.estado}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <a href="/editar">editar</a>
+                          <button
+                            value={person.cpf}
+                            onClick={SelectItemToManage}
+                            // onCLick={() => this.SelectItemToManage(person)}
+                            // href="/editar"
+                          >
+                            editar
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -156,6 +174,7 @@ export default function Table(props) {
       <Header />
       <Table />
       {/* <Pagination /> */}
+      {goToEdit ? <Redirect push to="/editar" /> : null}
     </>
   );
 }

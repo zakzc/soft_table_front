@@ -9,32 +9,30 @@ import Table from "./app/components/table";
 import base from "./app/baseData/baseCadastro.json";
 
 const App = () => {
-  const [people, setPeople] = useState(base);
+  const [Listagem, setListagem] = useState(base);
+  const [personToManage, setPersonToManage] = useState("");
+  ///
+  console.log("ca, ", Cadastro, typeof Cadastro, typeof base);
+  console.log("person: ", personToManage);
   const addNewPerson = (newPerson) => {
     console.log("Received");
-    setPeople([...people, newPerson]);
-    console.log("=>", people, typeof people, newPerson, typeof newPerson);
-    console.log("is now: ", people);
+    setListagem([...Cadastro, newPerson]);
+    console.log("=>", Cadastro, typeof Cadastro, newPerson, typeof newPerson);
+    console.log("is now: ", Cadastro);
   };
-  const editPerson = (updatedPerson) => {
+  const editPerson = () => {
     console.log("Received");
-    setPeople([...people, updatedPerson]);
-    console.log(
-      "=>",
-      people,
-      typeof people,
-      updatedPerson,
-      typeof updatedPerson
-    );
-    console.log("is now: ", people);
+    // setPeople([...people, dataToUpdate]);
+    // console.log("=>", people, typeof people, dataToUpdate, typeof dataToUpdate);
+    // console.log("is now: ", people);
   };
   const deletePerson = (personToDelete) => {
     console.log("Received");
-    setPeople([...people, personToDelete]);
+
     console.log(
       "=>",
-      people,
-      typeof people,
+      Cadastro,
+      typeof Cadastro,
       personToDelete,
       typeof personToDelete
     );
@@ -45,7 +43,11 @@ const App = () => {
       <Router>
         <NavBar />
         <Switch>
-          <Route exact path="/" render={(props) => <Table {...[people]} />} />
+          <Route
+            exact
+            path="/"
+            render={(props) => <Table {...{ Listagem, setPersonToManage }} />}
+          />
           <Route
             exact
             path="/cadastro"
@@ -54,7 +56,7 @@ const App = () => {
           <Route
             exact
             path="/editar"
-            render={(props) => <Editar {...{ editPerson, deletePerson }} />}
+            render={(props) => <Editar {...{ personToManage }} />}
           />
         </Switch>
       </Router>
