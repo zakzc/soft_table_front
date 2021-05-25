@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 ///
 import validate from "../utils/validate";
 
-export default function Cadastro({ addNewPerson }) {
+export default function Editar({ addNewPerson }) {
   const [novoCadastro, setNovoCadastro] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [displayMessage, setDisplayMessage] = useState(null);
