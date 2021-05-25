@@ -1,17 +1,35 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import firebase from "./firebase";
+/// comps
 import NavBar from "./app/components/navbar";
 import Cadastro from "./app/components/cadastro";
 import Editar from "./app/components/editar";
 import Table from "./app/components/table";
 // baseData for front end dev
-import base from "./app/baseData/baseCadastro.json";
+// import base from "./app/baseData/baseCadastro.json";
 
 const App = () => {
-  const [listagem, setListagem] = useState(base);
+  const [listagem, setListagem] = useState();
   const [personToManage, setPersonToManage] = useState("");
-  ///
+  /// firebase
+  const ref = firebase.firestore().collection("listaCadastro");
+  const getData = () => {
+    ref.onSnapshot((querySnapshot) => {
+      const itemsToLoad = [];
+      querySnapshot.forEach((doc) => {
+        itemsToLoad.push(doc.data());
+      });
+      console.log(itemsToLoad, typeof itemsToLoad);
+      setListagem(itemsToLoad);
+    });
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+  console.log("check: ", listagem, typeof listagem);
+  /// methods
   const addNewPerson = (newPerson) => {
     setListagem([...Cadastro, newPerson]);
   };
