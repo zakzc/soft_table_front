@@ -1,55 +1,65 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { XIcon } from "@heroicons/react/outline";
 import { useFormik } from "formik";
 ///
 import validate from "../utils/validate";
 
-export default function Editar({ personToManage }) {
-  console.log("edit: ", personToManage);
-  //   const [novoCadastro, setNovoCadastro] = useState("");
-  const [redirect, setRedirect] = useState(false);
+export default function Editar({ personToManage, editPerson, deletePerson }) {
+  //   const [itemUpdate, setItemUpdate] = useState("");
+  //   const [redirect, setRedirect] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(false);
   const [displayMessage, setDisplayMessage] = useState(null);
   ///
-  console.log("Recebeu: ", personToManage);
-  //   const displayValidationMessage = (message) => {
-  //     console.log("=> ", message);
-  //     setDisplayMessage(message);
-  //   };
-  ///
+  //   console.log("\nRecebeu: ", personToManage, typeof personToManage);
+  const displayValidationMessage = (message) => {
+    setDisplayMessage(message);
+  };
+
   const handleValidation = (data) => {
+    console.log("Validate this: ", data, typeof data);
     let check = validate(data);
     if (check.success) {
       console.log(check.success);
-      //   return true;
+      return true;
     }
-    // displayValidationMessage(check.message);
+    displayValidationMessage(check.message);
   };
   ///
-  const handleSubmit = () => {
-    // event.preventDefault();
-    // const novoCadastro = { nome, idade, estadoCivil, cpf, cidade, estado };
-    console.log("handle:", formik.values);
-    // setNovoCadastro({
-    //   nome: formik.values.nome,
-    //   idade: formik.values.idade,
-    //   estadoCivil: formik.values.estadoCivil,
-    //   cpf: formik.values.cpf,
-    //   cidade: formik.values.cidade,
-    //   estado: formik.values.estado,
-    // });
-    // console.log("now: ", novoCadastro);
-    // if (handleValidation(novoCadastro)) {
-    //   editPerson(novoCadastro);
-    //   setRedirect(true);
-    // }
+  const handleEdit = () => {
+    if (deleteItem) {
+      handleDelete();
+    } else {
+      console.log("handle:", formik.values);
+      console.log("Delete? ", deleteItem);
+      const newItem = {
+        nome: formik.values.nome,
+        idade: formik.values.idade,
+        estadoCivil: formik.values.estadoCivil,
+        cpf: formik.values.cpf,
+        cidade: formik.values.cidade,
+        estado: formik.values.estado,
+      };
+      console.log("Pre up: ", newItem, typeof newItem);
+      if (handleValidation(newItem)) {
+        //   setItemUpdate(newItem);
+        console.log("New value is: ", newItem, typeof newItem);
+        editPerson(newItem);
+        displayValidationMessage("Success on update");
+      }
+    }
+  };
+  const handleDelete = () => {
+    console.log("delete: ", personToManage);
+    deletePerson(personToManage);
+    displayValidationMessage("Delete this item");
+    setDeleteItem(false);
   };
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: personToManage[0],
-    onSubmit: handleSubmit,
+    onSubmit: handleEdit,
   });
-  console.log("form: ", formik.initialValues);
   /// views
   const Header = () => {
     return (
@@ -58,7 +68,6 @@ export default function Editar({ personToManage }) {
       </h2>
     );
   };
-
   const Messages = () => {
     return (
       <div
@@ -259,10 +268,17 @@ export default function Editar({ personToManage }) {
                   </div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                     <button
+                      onClick={() => setDeleteItem(true)}
+                      type="submit"
+                      className="inline-flex justify-center py-2 px-4 m-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      Excluir pessoa
+                    </button>
+                    <button
                       type="submit"
                       className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                      Cadastrar
+                      Alterar
                     </button>
                   </div>
                 </div>
@@ -277,7 +293,7 @@ export default function Editar({ personToManage }) {
           </div>
         </div>
       </div>
-      {redirect ? <Redirect push to="/" /> : null}
+      {/* {redirect ? <Redirect push to="/" /> : null} */}
     </>
   );
 }

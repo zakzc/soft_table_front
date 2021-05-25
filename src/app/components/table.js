@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 
-export default function Table({ Listagem, setPersonToManage }) {
+export default function Table({ listagem, setPersonToManage }) {
   // const [list] = useState(props[0]);
   // const [pageIndex] = useState(8);
   // const [curPage, setCurPage] = useState(1);
@@ -12,14 +12,13 @@ export default function Table({ Listagem, setPersonToManage }) {
   // const [curPage] = useState(1);
   // const [pageBegin] = useState((curPage - 1) * pageIndex);
   // const [pageEnd] = useState(pageBegin + pageIndex);
-  const [people] = useState(Listagem);
-  const [selected, setSelected] = useState("");
+  const [people] = useState(listagem);
+  // const [selected, setSelected] = useState("");
   const [goToEdit, setGoToEdit] = useState(false);
 
-  console.log("pe", people, typeof people);
   const SelectItemToManage = (e) => {
     let value = e.target.value;
-    let itemToSet = people.filter((i) => i.cpf == value);
+    let itemToSet = people.filter((i) => i.cpf === value);
     console.log("now: ", itemToSet);
     setPersonToManage(itemToSet);
     setGoToEdit(true);

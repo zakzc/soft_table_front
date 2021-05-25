@@ -25,17 +25,16 @@ export default function Cadastro({ addNewPerson }) {
   };
   ///
   const handleSubmit = () => {
-    // event.preventDefault();
-    // const novoCadastro = { nome, idade, estadoCivil, cpf, cidade, estado };
     console.log("handle:", formik.values);
-    setNovoCadastro({
+    const novoValor = {
       nome: formik.values.nome,
       idade: formik.values.idade,
       estadoCivil: formik.values.estadoCivil,
       cpf: formik.values.cpf,
       cidade: formik.values.cidade,
       estado: formik.values.estado,
-    });
+    };
+    setNovoCadastro(novoValor);
     console.log("now: ", novoCadastro);
     if (handleValidation(novoCadastro)) {
       addNewPerson(novoCadastro);

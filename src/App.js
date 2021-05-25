@@ -9,34 +9,27 @@ import Table from "./app/components/table";
 import base from "./app/baseData/baseCadastro.json";
 
 const App = () => {
-  const [Listagem, setListagem] = useState(base);
+  const [listagem, setListagem] = useState(base);
   const [personToManage, setPersonToManage] = useState("");
   ///
-  console.log("ca, ", Cadastro, typeof Cadastro, typeof base);
-  console.log("person: ", personToManage);
   const addNewPerson = (newPerson) => {
-    console.log("Received");
     setListagem([...Cadastro, newPerson]);
-    console.log("=>", Cadastro, typeof Cadastro, newPerson, typeof newPerson);
-    console.log("is now: ", Cadastro);
   };
-  const editPerson = () => {
-    console.log("Received");
-    // setPeople([...people, dataToUpdate]);
-    // console.log("=>", people, typeof people, dataToUpdate, typeof dataToUpdate);
-    // console.log("is now: ", people);
+  const editPerson = (personToEdit) => {
+    const listIndex = listagem.findIndex((e) => e.cpf === personToEdit.cpf);
+    console.log(
+      "listagem",
+      listagem.map((i) => i.cpf)
+    );
+    console.log("edit me", listIndex, personToEdit.cpf);
+    // 1. find index with objIndex = array.findIndex((obj) => obj.is == id.received)
+    // 2. update property with array[objIndex].property = newValue
+    // 3. log to check
   };
   const deletePerson = (personToDelete) => {
-    console.log("Received");
-
-    console.log(
-      "=>",
-      Cadastro,
-      typeof Cadastro,
-      personToDelete,
-      typeof personToDelete
-    );
-    console.log("is now: ", personToDelete);
+    console.log("Delete at app", personToDelete[0].cpf);
+    setListagem(listagem.filter((item) => item.cpf !== personToDelete[0].cpf));
+    return true;
   };
   return (
     <div className="App">
@@ -46,7 +39,7 @@ const App = () => {
           <Route
             exact
             path="/"
-            render={(props) => <Table {...{ Listagem, setPersonToManage }} />}
+            render={(props) => <Table {...{ listagem, setPersonToManage }} />}
           />
           <Route
             exact
@@ -56,7 +49,9 @@ const App = () => {
           <Route
             exact
             path="/editar"
-            render={(props) => <Editar {...{ personToManage }} />}
+            render={(props) => (
+              <Editar {...{ personToManage, editPerson, deletePerson }} />
+            )}
           />
         </Switch>
       </Router>
