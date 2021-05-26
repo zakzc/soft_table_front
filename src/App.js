@@ -12,6 +12,10 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [listagem, setListagem] = useState();
   const [personToManage, setPersonToManage] = useState("");
+  const [current, setNavigation] = useState({
+    lista: true,
+    cadastro: false,
+  });
 
   // * ####### Data #######
 
@@ -59,15 +63,15 @@ function App() {
   };
 
   const deletePerson = (personToDelete) => {
-    console.log("Delete at app", personToDelete[0].cpf);
+    console.log("Delete at app", personToDelete);
     ref
-      .doc(personToDelete.cpf)
+      .doc(personToDelete)
       .delete()
       .catch((err) => {
         console.error("Error on delete method: ", err);
         return { success: false, message: "Erro ao remover cadastro" };
       });
-    return { success: true, message: "Cadastro removido" };
+    return { success: true, message: "Cadastro removido com sucesso" };
     // setListagem(listagem.filter((item) => item.cpf !== personToDelete[0].cpf));
     // return true;
   };
@@ -81,21 +85,23 @@ function App() {
         <h1>Loading...</h1>
       ) : (
         <Router>
-          <NavBar />
+          <NavBar {...{ current }} />
           <Switch>
             {listagem ? (
               <Route
                 exact
                 path="/"
                 render={(props) => (
-                  <Table {...{ listagem, setPersonToManage }} />
+                  <Table {...{ listagem, setPersonToManage, setNavigation }} />
                 )}
               />
             ) : null}
             <Route
               exact
               path="/cadastro"
-              render={(props) => <Cadastro {...{ addNewPerson }} />}
+              render={(props) => (
+                <Cadastro {...{ addNewPerson, setNavigation }} />
+              )}
             />
             <Route
               exact

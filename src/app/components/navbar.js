@@ -1,16 +1,22 @@
+import React, { useState } from "react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-
-const navigation = [
-  { name: "Visualizar", href: "/", id: 1, current: true },
-  { name: "Novo Cadastro", href: "/cadastro", id: 2, current: false },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function NavBar() {
+export default function NavBar(current) {
+  console.log("rec", current.current.lista, typeof current);
+  const [navigation] = useState([
+    { name: "Visualizar", href: "/", id: 1, current: current.current.lista },
+    {
+      name: "Novo Cadastro",
+      href: "/cadastro",
+      id: 2,
+      current: current.current.cadastro,
+    },
+  ]);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

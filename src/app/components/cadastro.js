@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 /// utils
 import validate from "../utils/validate";
 import Alerts from "../utils/alerts";
 
-export default function Cadastro({ addNewPerson }) {
+export default function Cadastro({ addNewPerson, setNavigation }) {
   const [alertToUser, setAlertToUser] = useState({
     show: false,
     type: null,
     message: null,
     details: null,
   });
+
+  useEffect(() => {
+    setNavigation({
+      lista: false,
+      cadastro: true,
+    });
+  }, []);
+
   // * ####### Data #######
   const displayValidationMessage = (type, message, details) => {
     console.log("=> ", message);

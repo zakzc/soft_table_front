@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import { Redirect } from "react-router-dom";
 // import { XIcon } from "@heroicons/react/outline";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
 /// utils
 import validate from "../utils/validate";
 import Alerts from "../utils/alerts";
@@ -14,7 +14,7 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
     message: null,
     details: null,
   });
-
+  console.log("edit me:", personToManage);
   // * ####### Data #######
   const displayValidationMessage = (type, message, details) => {
     console.log("=> ", message);
@@ -50,7 +50,7 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
         nome: formik.values.nome,
         idade: formik.values.idade,
         estadoCivil: formik.values.estadoCivil,
-        cpf: formik.values.cpf,
+        cpf: personToManage[0].cpf,
         cidade: formik.values.cidade,
         estado: formik.values.estado,
       };
@@ -67,8 +67,11 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
   };
   const handleDelete = () => {
     console.log("delete: ", formik.values.cpf);
-    deletePerson(formik.values.cpf);
-    displayValidationMessage("danger", "Cadastro removido com sucesso", null);
+    let deleteOperation = deletePerson(formik.values.cpf);
+    if (deleteOperation.sucess) {
+      displayValidationMessage("warn", deleteOperation.message, null);
+    }
+    displayValidationMessage("danger", "Falha na operação", null);
   };
   const formik = useFormik({
     enableReinitialize: true,
@@ -178,15 +181,9 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
                         >
                           CPF
                         </label>
-                        <input
-                          type="text"
-                          name="cpf"
-                          id="cpf"
-                          value={formik.values.cpf}
-                          placeholder={formik.initialValues.cpf}
-                          onChange={formik.handleChange}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
+                        <h3 className="text-gray-400">
+                          {personToManage[0].cpf}
+                        </h3>
                       </div>
 
                       <div className="col-span-6 sm:col-span-6 lg:col-span-2">
