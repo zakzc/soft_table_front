@@ -1,6 +1,4 @@
 import { useState } from "react";
-// import { Redirect } from "react-router-dom";
-// import { XIcon } from "@heroicons/react/outline";
 import { Formik, useFormik } from "formik";
 /// utils
 import validate from "../utils/validate";
@@ -14,10 +12,8 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
     message: null,
     details: null,
   });
-  console.log("edit me:", personToManage);
   // * ####### Data #######
   const displayValidationMessage = (type, message, details) => {
-    console.log("=> ", message);
     setAlertToUser({
       show: true,
       type: type,
@@ -44,8 +40,6 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
     if (deleteItem) {
       handleDelete();
     } else {
-      console.log("handle:", formik.values);
-      console.log("Delete? ", deleteItem);
       const newItem = {
         nome: formik.values.nome,
         idade: formik.values.idade,
@@ -54,7 +48,6 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
         cidade: formik.values.cidade,
         estado: formik.values.estado,
       };
-      console.log("Pre up: ", newItem, typeof newItem);
       if (handleValidation(newItem)) {
         editPerson(newItem);
         displayValidationMessage(
@@ -66,7 +59,6 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
     }
   };
   const handleDelete = () => {
-    console.log("delete: ", formik.values.cpf);
     let deleteOperation = deletePerson(formik.values.cpf);
     if (deleteOperation.sucess) {
       displayValidationMessage("warn", deleteOperation.message, null);
@@ -262,13 +254,13 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
                     <button
                       onClick={() => setDeleteItem(true)}
                       type="submit"
-                      className="inline-flex justify-center py-2 px-4 m-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="inline-flex justify-center py-2 px-4 m-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Excluir pessoa
                     </button>
                     <button
                       type="submit"
-                      className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Alterar
                     </button>

@@ -21,7 +21,6 @@ export default function Cadastro({ addNewPerson, setNavigation }) {
 
   // * ####### Data #######
   const displayValidationMessage = (type, message, details) => {
-    console.log("=> ", message);
     setAlertToUser({
       show: true,
       type: type,
@@ -45,7 +44,6 @@ export default function Cadastro({ addNewPerson, setNavigation }) {
   };
   ///
   const handleSubmit = () => {
-    console.log("handle:", formik.values);
     const novoValor = {
       nome: formik.values.nome,
       idade: formik.values.idade,

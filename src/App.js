@@ -40,7 +40,6 @@ function App() {
 
   /// data methods
   const addNewPerson = (newPerson) => {
-    console.log("Add on app: ", newPerson, typeof newPerson);
     ref
       .doc(newPerson.cpf)
       .set(newPerson)
@@ -63,7 +62,6 @@ function App() {
   };
 
   const deletePerson = (personToDelete) => {
-    console.log("Delete at app", personToDelete);
     ref
       .doc(personToDelete)
       .delete()
@@ -72,11 +70,7 @@ function App() {
         return { success: false, message: "Erro ao remover cadastro" };
       });
     return { success: true, message: "Cadastro removido com sucesso" };
-    // setListagem(listagem.filter((item) => item.cpf !== personToDelete[0].cpf));
-    // return true;
   };
-  ///
-  console.log("List is :", listagem, "loading is: ", loading);
 
   // * ####### View #######
   return (

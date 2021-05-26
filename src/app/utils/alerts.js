@@ -1,12 +1,6 @@
 import React from "react";
 
 export default function Alerts(customAlert) {
-  console.log(
-    "receive alerts: ",
-    customAlert.type,
-    customAlert.message,
-    customAlert.details
-  );
   if (customAlert.type == "warn") {
     return (
       <div>

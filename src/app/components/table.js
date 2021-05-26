@@ -19,7 +19,6 @@ export default function Table({ listagem, setPersonToManage }) {
   const SelectItemToManage = (e) => {
     let value = e.target.value;
     let itemToSet = people.filter((i) => i.cpf === value);
-    console.log("now: ", itemToSet);
     setPersonToManage(itemToSet);
     setGoToEdit(true);
   };

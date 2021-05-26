@@ -1,7 +1,6 @@
 import Joi from "joi";
 
 export default function validate(data) {
-  console.log("\nreceived at validate: ", data, typeof data);
   let cadastroSchema = Joi.object({
     nome: Joi.string()
       .regex(/^[^\d]*$/)
@@ -53,7 +52,6 @@ export default function validate(data) {
     }),
   });
   const isValid = cadastroSchema.validate(data);
-  console.log("is: ", isValid);
   if (isValid.error) {
     return { success: false, message: isValid.error.details[0].message };
   }

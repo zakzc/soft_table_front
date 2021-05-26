@@ -7,7 +7,6 @@ function classNames(...classes) {
 }
 
 export default function NavBar(current) {
-  console.log("rec", current.current.lista, typeof current);
   const [navigation] = useState([
     { name: "Visualizar", href: "/", id: 1, current: current.current.lista },
     {
