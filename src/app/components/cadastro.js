@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
 import { XIcon } from "@heroicons/react/outline";
 import { useFormik } from "formik";
 ///
 import validate from "../utils/validate";
 
 export default function Cadastro({ addNewPerson }) {
-  const [novoCadastro, setNovoCadastro] = useState("");
-  const [redirect, setRedirect] = useState(false);
   const [displayMessage, setDisplayMessage] = useState(null);
   ///
   const displayValidationMessage = (message) => {
@@ -34,11 +31,10 @@ export default function Cadastro({ addNewPerson }) {
       cidade: formik.values.cidade,
       estado: formik.values.estado,
     };
-    setNovoCadastro(novoValor);
-    console.log("now: ", novoCadastro);
-    if (handleValidation(novoCadastro)) {
-      addNewPerson(novoCadastro);
-      setRedirect(true);
+    console.log("handler novo valor: ", novoValor, typeof novoValor);
+    if (handleValidation(novoValor)) {
+      let message = addNewPerson(novoValor).message;
+      displayValidationMessage(message);
     }
   };
   const formik = useFormik({
@@ -273,7 +269,6 @@ export default function Cadastro({ addNewPerson }) {
           </div>
         </div>
       </div>
-      {redirect ? <Redirect push to="/" /> : null}
     </>
   );
 }

@@ -2,15 +2,17 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCO3q4Bf0n3SaiUHIydqBwreldCv8sjtIQ",
-  authDomain: "softtable-ed330.firebaseapp.com",
-  databaseURL: "https://softtable-ed330-default-rtdb.firebaseio.com",
-  projectId: "softtable-ed330",
-  storageBucket: "softtable-ed330.appspot.com",
-  messagingSenderId: "933274909868",
-  appId: "1:933274909868:web:da1d47c0e168c089ce3309",
-  measurementId: "G-3E3M54BPPG",
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
+
+// console.log("=> ", process.env.REACT_APP_FIREBASE_SENDER_ID);
 
 firebase.initializeApp(firebaseConfig);
 

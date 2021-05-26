@@ -30,10 +30,11 @@ export default function validate(data) {
         "string.min": "Estado civil deve ter pelo menos {#limit} caracteres",
         "any.required": "O estado civil  é obrigatório",
       }),
-    cpf: Joi.string().min(10).max(12).required().messages({
+    cpf: Joi.string().min(11).max(11).required().messages({
       "string.base": "Cpf deve conter números e traço",
       "string.empty": "O campo cpf não pode estar vazio",
       "string.min": "Cpf deve ter {#limit} caracteres",
+      "string.max": "Cpf deve ter {#limit} caracteres",
       "any.required": "O campo cpf é obrigatório",
     }),
     cidade: Joi.string()
