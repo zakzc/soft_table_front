@@ -49,6 +49,12 @@ A partir de: tailwindcomponents.com/components/alerts-collection
 
 - (122b041) Atualização da navegação com indicação da página atual
 
+- Commits relativos a ajustes para deploy
+
+- (0b29294) Início da implementação da paginação, em desenvolvimento
+
+- (6aa9d1b) Testes do módulo de validação
+
 ## Observações
 
 Em função da forma como o projeto foi estabelecido, há algumas questões a serem consideradas:
@@ -61,8 +67,8 @@ Em função da forma como o projeto foi estabelecido, há algumas questões a se
 
 ## Problemas encontrados
 
-- Deployment, uma vez que nunca fiz um deployment que envolvesse craco + firebase + tailwind.
+- Deployment, uma vez que nunca fiz um deployment que envolvesse craco + firebase + tailwind e ainda terei que pesquisar detalhes de configuração para debugar os atuais problemas com o deploy.
 
-- Paginação. Imagino/Suponho que a ideia é uma paginação que se adapte à quantidade de dados do DB e não apenas uma paginação fixa. Como esse é um item de navegação um pouco demorado no que se refere a Visão + manipulação dos dados, ficou para o final e está ainda em desenvolvimento.
+- Paginação. Em desenvolvimento, ainda desenvolvendo funções de avanço, recuo, escolha de página
 
 - Formatação do Menu-hamburger
