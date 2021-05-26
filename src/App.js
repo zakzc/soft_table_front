@@ -46,6 +46,7 @@ function App() {
       });
     return { success: true, message: "Cadastro realizado com sucesso" };
   };
+
   const editPerson = (personToEdit) => {
     ref
       .doc(personToEdit.cpf)
@@ -56,6 +57,7 @@ function App() {
       });
     return { success: true, message: "Cadastro atualizado com sucesso" };
   };
+
   const deletePerson = (personToDelete) => {
     console.log("Delete at app", personToDelete[0].cpf);
     ref

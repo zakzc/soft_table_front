@@ -1,24 +1,39 @@
 import { useState } from "react";
-import { XIcon } from "@heroicons/react/outline";
 import { useFormik } from "formik";
-///
+/// utils
 import validate from "../utils/validate";
+import Alerts from "../utils/alerts";
 
 export default function Cadastro({ addNewPerson }) {
-  const [displayMessage, setDisplayMessage] = useState(null);
-  ///
-  const displayValidationMessage = (message) => {
+  const [alertToUser, setAlertToUser] = useState({
+    show: false,
+    type: null,
+    message: null,
+    details: null,
+  });
+  // * ####### Data #######
+  const displayValidationMessage = (type, message, details) => {
     console.log("=> ", message);
-    setDisplayMessage(message);
+    setAlertToUser({
+      show: true,
+      type: type,
+      message: message,
+      details: details,
+    });
   };
   ///
   const handleValidation = (data) => {
     let check = validate(data);
     if (check.success) {
-      console.log(check.success);
+      displayValidationMessage("success", "Dados válidos", null);
       return true;
+    } else {
+      displayValidationMessage(
+        "warn",
+        "confira se os dados estão corretos",
+        check.message
+      );
     }
-    displayValidationMessage(check.message);
   };
   ///
   const handleSubmit = () => {
@@ -31,10 +46,8 @@ export default function Cadastro({ addNewPerson }) {
       cidade: formik.values.cidade,
       estado: formik.values.estado,
     };
-    console.log("handler novo valor: ", novoValor, typeof novoValor);
     if (handleValidation(novoValor)) {
-      let message = addNewPerson(novoValor).message;
-      displayValidationMessage(message);
+      addNewPerson(novoValor);
     }
   };
   const formik = useFormik({
@@ -48,7 +61,7 @@ export default function Cadastro({ addNewPerson }) {
     },
     onSubmit: handleSubmit,
   });
-  /// views
+  // * ####### View #######
   const Header = () => {
     return (
       <h2 className="text-2xl p-2 mt-2  font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
@@ -56,36 +69,15 @@ export default function Cadastro({ addNewPerson }) {
       </h2>
     );
   };
-
-  const Messages = () => {
-    return (
-      <div
-        className="bg-red-lightest border border-red-light text-red-dark pl-4 pr-8 py-3 rounded relative"
-        role="alert"
-      >
-        <span className="block sm:inline">
-          <span className="absolute pin-t pin-b pin-r pr-2 py-3">
-            <svg
-              className="h-6 w-6 text-red"
-              role="button"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <title>Close</title>
-              {/* <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" /> */}
-              <XIcon />
-            </svg>
-          </span>
-          {displayMessage}
-        </span>
-      </div>
-    );
-  };
   ///
   return (
     <>
       <Header />
-      <Messages />
+      <Alerts
+        type={alertToUser.type}
+        message={alertToUser.message}
+        details={alertToUser.details}
+      />
       <div className="bg-gray-50">
         <div className="hidden sm:block" aria-hidden="true">
           <div className="py-5">
