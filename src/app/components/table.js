@@ -3,16 +3,28 @@ import { Redirect } from "react-router-dom";
 import Pagination from "./pagination";
 
 export default function Table({ listagem, setPersonToManage }) {
-  const [people] = useState(listagem);
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalNoRegisters = listagem.length;
+  const registersPerPage = 3;
+  const numberOfPages = Math.ceil(totalNoRegisters / registersPerPage);
+  const initialRegister = Math.max((currentPage - 1) * registersPerPage + 1, 0);
+  const finalRegister = Math.min(
+    initialRegister + registersPerPage,
+    listagem.length
+  );
+  //
+  const [people] = useState(listagem.slice(initialRegister, finalRegister));
   const [goToEdit, setGoToEdit] = useState(false);
-
+  // * ####### Data #######
   const SelectItemToManage = (e) => {
     let value = e.target.value;
     let itemToSet = people.filter((i) => i.cpf === value);
     setPersonToManage(itemToSet);
     setGoToEdit(true);
   };
-  // views
+
+  // * ####### Data #######
   const Header = () => {
     return (
       <h2 className="text-2xl font-bold leading-7 p-2 mt-2 text-gray-900 sm:text-3xl sm:truncate">
@@ -127,10 +139,12 @@ export default function Table({ listagem, setPersonToManage }) {
       <Header />
       <Table />
       <Pagination
-        initialPage={1}
-        finalPage={3}
-        totalPages={12}
+        initialRegister={initialRegister}
+        finalRegister={finalRegister}
+        numberOfPages={numberOfPages}
+        totalNoRegisters={totalNoRegisters}
         currentPage={2}
+        setCurrentPage
       />
       {goToEdit ? <Redirect push to="/editar" /> : null}
     </>
