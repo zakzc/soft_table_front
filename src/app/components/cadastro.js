@@ -17,6 +17,7 @@ export default function Cadastro({ addNewPerson, setNavigation }) {
       lista: false,
       cadastro: true,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // * ####### Data #######

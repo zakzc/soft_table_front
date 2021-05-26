@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 /// utils
 import validate from "../utils/validate";
 import Alerts from "../utils/alerts";

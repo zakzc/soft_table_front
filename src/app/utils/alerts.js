@@ -67,17 +67,12 @@ export default function Alerts(customAlert) {
               {customAlert.message}
             </h3>
             <p className="pt-2 text-green-700">{customAlert.details}</p>
-            {/* <div className="space-x-6">
-              <button className="text-green-900 font-semibold tracking-wider hover:underline focus:outline-none">
-                Dismiss
-              </button>
-            </div> */}
           </div>
         </div>
       </div>
     );
   }
-
+  /* eslint eqeqeq: "off", curly:"error" */
   return null;
 }
 
