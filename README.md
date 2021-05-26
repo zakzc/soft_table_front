@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Soft Table
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Objetivo do projeto
 
-## Available Scripts
+Projeto de apresentação para a empresa SoftWrap
 
-In the project directory, you can run:
+### Tecnologias utilizadas
 
-### `yarn start`
+Este projeto implementa as seguintes tecnologias:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React
+- Tailwind
+- React-router-dom
+- Fomik
+- Joi
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Relatório
 
-### `yarn test`
+Estágios de desenvolvimento do projeto (entre parêntesis a referencia do commit):
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- (4116733) Foi desenvolvida uma base para o projeto a partir de componentes do site Tailwind, com ajustes e refatoração onde necessário para se ajustar ao especificado:
 
-### `yarn build`
+Barra de navegação: https://tailwindui.com/components/application-ui/navigation/navbars
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Tabela: https://tailwindui.com/components/application-ui/lists/tables
+Formulário: https://tailwindui.com/components/application-ui/forms/form-layouts/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- ( 06980f9) Foi adicionado o routing para a paginação entre Visualização e Criar Novo Cadastro
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- (f9b0ee5) Foi feita a base de atualização dos dados com redirecionamento para a página de listagem via Redirect.
 
-### `yarn eject`
+- (ef7c663) Implementação inicial do processo de validação utilizando Joi.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- (c1746fe) Ajustes para modularizar o sistema, separando módulos, especialmente o de validação.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- (eb4b3f8) Após a base do cadastro (view) implementação da lógica utilizando formik
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- (99309ae) Implementação inicial da página de edição. Ver observações para comentários.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- (008e902) Implementação dos métodos que implementam as funcionalidades de CRUD no frontend.
 
-## Learn More
+- (da8e6d9) Integração com o DB no Firebase
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- (4a5feac) Implementação dos métodos de CRUD, no frontend, agora utilizando o firestore.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- (d63f2e9) Criação de alertas com a formação pedida
 
-### Code Splitting
+A partir de: tailwindcomponents.com/components/alerts-collection
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- (122b041) Atualização da navegação com indicação da página atual
 
-### Analyzing the Bundle Size
+Observações
+Em função da forma como o projeto foi pedido, há algumas questões a serem consideradas:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Como não há navegação para a página de editar na barra, o mesmo é alcançado por meio da listagem. A atualização da página, porém, irá gerar erro, já que os dados são passados nas props e estas são zeradas no caso de um re-rendering. O erro será "Cannot render property nome of undefined", já que os dados, agora estão como não-definidos.
+Utilizei o cpf como chave identificadora, o que me poupou a necessidade de usar outras chaves únicas, uma vez que essa é uma chave naturalmente única. Em função disso, a página de alterar não pode alterar o cpf. Para alterar um cpf, o usuário terá que entrar um novo cadastro e apagar o anterior.
+Como não foi estabelecido nenhum mecanismo de gerenciamento de estado (Redux, por exemplo), passei as props de parent component para child component. Apesar disso constituir um anti-padrão (prop-drilling), por se tratar de uma aplicação pequena e de pouca profundidade na passagem (apenas um nível) e frente às especificações, não vi problema nessa passagem de dados.
+Alguns alertas permaneceram na aplicação. Em especial o alerta de que "Each child in a list should have a unique "key" prop", já que este está sendo gerado pela biblioteca Disclosure que é parte do modelo que utilizei.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Problemas encontrados
+Deployment, uma vez que nunca fiz um deployment que envolvesse craco + firebase + tailwind.
+Paginação. Imagino/Suponho que a ideia é uma paginação que se adapte à quantidade de dados do DB e não apenas uma paginação fixa. Como esse é um item de navegação um pouco demorado no que se refere a Visão + manipulação dos dados, ficou para o final e está ainda em desenvolvimento.
