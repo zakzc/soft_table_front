@@ -3,20 +3,22 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 
 const Pagination = ({ setCurrentPage, paginationStatus }) => {
   console.log("Pagination: ", paginationStatus);
-
+  // * ####### Data #######
   let pageNumbers = [];
   for (let j = 1; j < paginationStatus.pages + 1; j++) {
     pageNumbers.push(j);
   }
   const handlePagination_minus = () => {
-    console.log("click");
     setCurrentPage(Math.max(paginationStatus.current - 1, 1));
   };
   const handlePagination_plus = () => {
-    console.log("click");
     setCurrentPage(
       Math.min(paginationStatus.current + 1, paginationStatus.pages)
     );
+  };
+  const handlePagination_number = (n) => {
+    console.log("click");
+    setCurrentPage(n);
   };
   // * ####### View #######
   return (
@@ -40,8 +42,8 @@ const Pagination = ({ setCurrentPage, paginationStatus }) => {
           <p className="text-sm text-gray-700">
             Mostrando de{" "}
             <span className="font-medium">{paginationStatus.initial}</span> a{" "}
-            <span className="font-medium">{paginationStatus.final}</span> de{" "}
-            <span className="font-medium">{paginationStatus.total}</span>{" "}
+            <span className="font-medium">{paginationStatus.final - 1}</span> de{" "}
+            <span className="font-medium">{paginationStatus.total - 1}</span>{" "}
             resultados
           </p>
         </div>
@@ -59,13 +61,14 @@ const Pagination = ({ setCurrentPage, paginationStatus }) => {
             </button>
             {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
             {pageNumbers.map((i) => (
-              <span
+              <button
+                onClick={() => handlePagination_number(i)}
                 key={i}
                 aria-current="page"
                 className="z-10 bg-white-50 border-black-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
               >
                 {i}
-              </span>
+              </button>
             ))}
             <button
               onClick={handlePagination_plus}
