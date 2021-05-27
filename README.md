@@ -62,6 +62,8 @@ A partir de: tailwindcomponents.com/components/alerts-collection
 
 - (bb32acb) Percebi que o diretório de testes estava fora da página app (prefiro sempre deixar todos os arquivos da aplicação em uma única pasta).
 
+- (96e293e) Atualização da navegação em dispositivo móvel.
+
 ## Observações
 
 Em função da forma como o projeto foi estabelecido, há algumas questões a serem consideradas:
@@ -75,7 +77,3 @@ Em função da forma como o projeto foi estabelecido, há algumas questões a se
 - Testes: fiz apenas alguns testes básicos de validação. Teste de integração seria complicado de realizar, uma vez que a conexão com firebase é feita em app.js e não em um component em separado, como seria feito, por exemplo, com uma API.
 
 - Alguns alertas podem ter permanecido na aplicação post-deploy. Em especial o alerta de que "Each child in a list should have a unique "key" prop", já que este está sendo gerado pela biblioteca Disclosure que é parte do modelo que utilizei.
-
-## Problemas encontrados e pendências
-
-- Formatação do Menu-hamburger em visualização para dispositivos móveis.
