@@ -2,7 +2,6 @@ import React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 
 const Pagination = ({ setCurrentPage, paginationStatus }) => {
-  console.log("Pagination: ", paginationStatus);
   // * ####### Data #######
   let pageNumbers = [];
   for (let j = 1; j < paginationStatus.pages + 1; j++) {
@@ -17,7 +16,6 @@ const Pagination = ({ setCurrentPage, paginationStatus }) => {
     );
   };
   const handlePagination_number = (n) => {
-    console.log("click");
     setCurrentPage(n);
   };
   // * ####### View #######

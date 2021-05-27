@@ -1,4 +1,4 @@
-import validate from "../app/utils/validate";
+import validate from "../utils/validate";
 
 describe("Validation", () => {
   test("Dados corretos, validados", () => {

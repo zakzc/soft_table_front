@@ -38,7 +38,6 @@ export default function Table({ listagem, setPersonToManage }) {
     updatePagination();
   }, [currentPage]);
 
-  console.log("from table: ", currentPage, paginationStatus);
   // * ####### Data #######
   const SelectItemToManage = (e) => {
     let value = e.target.value;
