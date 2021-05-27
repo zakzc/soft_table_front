@@ -8,6 +8,7 @@ export default function Alerts(customAlert) {
           <div className="text-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              q
               className="fill-current w-5 pt-1"
               viewBox="0 0 24 24"
             >

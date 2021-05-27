@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import Pagination from "./pagination";
 
@@ -13,9 +13,32 @@ export default function Table({ listagem, setPersonToManage }) {
     initialRegister + registersPerPage,
     listagem.length
   );
-  //
-  const [people] = useState(listagem.slice(initialRegister, finalRegister));
+  const paginationStatus = {
+    initial: initialRegister,
+    final: finalRegister,
+    total: totalNoRegisters,
+    pages: numberOfPages,
+    current: currentPage,
+  };
+  // current set of registers
+  const [people, setPeople] = useState(
+    listagem.slice(initialRegister, finalRegister)
+  );
   const [goToEdit, setGoToEdit] = useState(false);
+
+  useEffect(() => {
+    const updatePagination = () => {
+      setPeople(
+        listagem.slice(
+          Math.max((currentPage - 1) * registersPerPage + 1, 0),
+          Math.min(initialRegister + registersPerPage, listagem.length)
+        )
+      );
+    };
+    updatePagination();
+  }, [currentPage]);
+
+  console.log("from table: ", currentPage, paginationStatus);
   // * ####### Data #######
   const SelectItemToManage = (e) => {
     let value = e.target.value;
@@ -139,12 +162,8 @@ export default function Table({ listagem, setPersonToManage }) {
       <Header />
       <Table />
       <Pagination
-        initialRegister={initialRegister}
-        finalRegister={finalRegister}
-        numberOfPages={numberOfPages}
-        totalNoRegisters={totalNoRegisters}
-        currentPage={2}
-        setCurrentPage
+        paginationStatus={paginationStatus}
+        setCurrentPage={setCurrentPage}
       />
       {goToEdit ? <Redirect push to="/editar" /> : null}
     </>
