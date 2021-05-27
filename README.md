@@ -4,6 +4,12 @@
 
 Projeto de apresentação para a empresa SoftWrap
 
+
+
+Site ativo: https://softtable-ed330.web.app/
+
+
+
 ### Tecnologias utilizadas
 
 Este projeto implementa as seguintes tecnologias:
