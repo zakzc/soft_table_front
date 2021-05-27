@@ -7,6 +7,7 @@ function classNames(...classes) {
 }
 
 export default function NavBar(current) {
+  // * ####### Data #######
   const [navigation] = useState([
     { name: "Visualizar", href: "/", id: 1, current: current.current.lista },
     {
@@ -16,6 +17,7 @@ export default function NavBar(current) {
       current: current.current.cadastro,
     },
   ]);
+  // * ####### View #######
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

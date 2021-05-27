@@ -5,6 +5,7 @@ import validate from "../utils/validate";
 import Alerts from "../utils/alerts";
 
 export default function Cadastro({ addNewPerson, setNavigation }) {
+  // * ####### Data #######
   const [alertToUser, setAlertToUser] = useState({
     show: false,
     type: null,
@@ -20,7 +21,6 @@ export default function Cadastro({ addNewPerson, setNavigation }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // * ####### Data #######
   const displayValidationMessage = (type, message, details) => {
     setAlertToUser({
       show: true,
@@ -68,6 +68,7 @@ export default function Cadastro({ addNewPerson, setNavigation }) {
     },
     onSubmit: handleSubmit,
   });
+
   // * ####### View #######
   const Header = () => {
     return (

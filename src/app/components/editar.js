@@ -5,6 +5,7 @@ import validate from "../utils/validate";
 import Alerts from "../utils/alerts";
 
 export default function Editar({ personToManage, editPerson, deletePerson }) {
+  // * ####### Data #######
   const [deleteItem, setDeleteItem] = useState(false);
   const [alertToUser, setAlertToUser] = useState({
     show: false,
@@ -12,7 +13,7 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
     message: null,
     details: null,
   });
-  // * ####### Data #######
+
   const displayValidationMessage = (type, message, details) => {
     setAlertToUser({
       show: true,
@@ -70,7 +71,8 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
     initialValues: personToManage[0],
     onSubmit: handleEdit,
   });
-  /// views
+
+  // * ####### View #######
   const Header = () => {
     return (
       <h2 className="text-2xl p-2 mt-2  font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
@@ -78,7 +80,7 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
       </h2>
     );
   };
-  // * ####### View #######
+
   return (
     <>
       <Header />

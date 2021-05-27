@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import Pagination from "./pagination";
 
 export default function Table({ listagem, setPersonToManage }) {
+  // * ####### Data #######
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
   const totalNoRegisters = listagem.length;
@@ -38,7 +39,6 @@ export default function Table({ listagem, setPersonToManage }) {
     updatePagination();
   }, [currentPage]);
 
-  // * ####### Data #######
   const SelectItemToManage = (e) => {
     let value = e.target.value;
     let itemToSet = people.filter((i) => i.cpf === value);
@@ -46,7 +46,7 @@ export default function Table({ listagem, setPersonToManage }) {
     setGoToEdit(true);
   };
 
-  // * ####### Data #######
+  // * ####### View #######
   const Header = () => {
     return (
       <h2 className="text-2xl font-bold leading-7 p-2 mt-2 text-gray-900 sm:text-3xl sm:truncate">

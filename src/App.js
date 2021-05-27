@@ -9,6 +9,7 @@ import Editar from "./app/components/editar";
 import Table from "./app/components/table";
 
 function App() {
+  // * ####### Data #######
   const [loading, setLoading] = useState(false);
   const [listagem, setListagem] = useState();
   const [personToManage, setPersonToManage] = useState("");
@@ -16,8 +17,6 @@ function App() {
     lista: true,
     cadastro: false,
   });
-
-  // * ####### Data #######
 
   /// firebase
   const ref = firebase.firestore().collection("listaCadastro");

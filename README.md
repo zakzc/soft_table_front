@@ -9,14 +9,12 @@ Projeto de apresentação para a empresa SoftWrap
 Este projeto implementa as seguintes tecnologias:
 
 - React
-
 - Tailwind
-
+- Craco
 - React-router-dom
-
 - Fomik
-
 - Joi
+- Jest
 
 ## Relatório
 
