@@ -8,7 +8,7 @@ export default function Table({ listagem, setPersonToManage }) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalNoRegisters = listagem.length;
   const registersPerPage = 3;
-  const numberOfPages = Math.ceil(totalNoRegisters / registersPerPage);
+  const numberOfPages = Math.floor(totalNoRegisters / registersPerPage);
   const initialRegister = Math.max((currentPage - 1) * registersPerPage + 1, 0);
   const finalRegister = Math.min(
     initialRegister + registersPerPage,
