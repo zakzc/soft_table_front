@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
+// import { Redirect } from "react-router-dom";
 /// utils
 import validate from "../utils/validate";
 import Alerts from "../utils/alerts";
@@ -13,6 +14,15 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
     message: null,
     details: null,
   });
+
+  useEffect(() => {
+    window.onbeforeunload = (e) => {
+      return true;
+    };
+    return () => {
+      window.onbeforeunload = null;
+    };
+  }, []);
 
   const displayValidationMessage = (type, message, details) => {
     setAlertToUser({
@@ -66,6 +76,7 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
     }
     displayValidationMessage("danger", "Falha na operação", null);
   };
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: personToManage[0],
@@ -279,7 +290,6 @@ export default function Editar({ personToManage, editPerson, deletePerson }) {
           </div>
         </div>
       </div>
-      {/* {redirect ? <Redirect push to="/" /> : null} */}
     </>
   );
 }

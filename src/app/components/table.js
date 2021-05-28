@@ -119,9 +119,6 @@ export default function Table({ listagem, setPersonToManage }) {
                           <div className="text-sm text-gray-900">
                             {person.idade}
                           </div>
-                          {/* <div className="text-sm text-gray-500">
-                            {person.department}
-                          </div> */}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           {person.estadoCivil}
@@ -139,8 +136,6 @@ export default function Table({ listagem, setPersonToManage }) {
                           <button
                             value={person.cpf}
                             onClick={SelectItemToManage}
-                            // onCLick={() => this.SelectItemToManage(person)}
-                            // href="/editar"
                           >
                             editar
                           </button>
